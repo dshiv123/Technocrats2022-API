@@ -7,6 +7,8 @@ module.exports = Object.freeze({
   API_SUCCESS: "API Loaded succesfully",
   BASE_PATH: "./src/api",
   USER_CREATION_ERROR: "Some error occurred while creating the User.",
+  QUESTION_CREATION_ERROR: "Some error occurred while creating the Question.",
+  QUESTION_MAPPING_ERROR: "Some error occurred while mapping the Question.",
   USER_EMAIL_ERROR: "Content can not be empty!.",
   USER_DELETED_SUCCESFULLY: "User Deleted Succesfully",
   SERVICE_WORKING_FINE: "Service working fine!!!",
@@ -15,7 +17,9 @@ module.exports = Object.freeze({
   USER_DELETE_ERROR: "Some error occurred while deleting the UserID:",
   DELETED_SUCCESFULLY: "User Deleted Succesfully",
   Quiz: "Quiz",
+  QUESTION: "Quiz",
   LIST: "List",
+  MAP: "Map",
   SUCCESS: "Success",
   SUCCESS_STATUS_CODE: "200"
 

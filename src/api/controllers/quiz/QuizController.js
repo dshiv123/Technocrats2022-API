@@ -2,7 +2,6 @@ const db = require("../../database/models");
 const mail = require("../../util/common-util/mail.util");
 const [successResponse, errorsResponse] = require("../../util/common-util/repsonse");
 const constants = require("../../util/common-util/constatnt/constants");
-
 const Quiz = db.QuizMaster;
 create = (req, res) => {
     if (!req.body) {
@@ -14,7 +13,8 @@ create = (req, res) => {
     // Save Quiz in the database
     Quiz.create(quiz)
         .then(data => {
-            res.send(data);
+            successResponse(res, constants.SUCCESS_STATUS_CODE, `${constants.Quiz}`, data);
+            // res.send(data);
             //  mail();
         })
         .catch(err => {

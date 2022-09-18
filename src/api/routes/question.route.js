@@ -10,4 +10,6 @@ var jsonParser = bodyParser.json();
 router.post("/question", jsonParser, question.create);
 router.get("/question", question.helloQuestion);
 router.get("/question/allquestion", question.findAll);
+router.post("/question/mapquestionanswer", jsonParser, question.mapquestionanswer);
+
 module.exports = router;

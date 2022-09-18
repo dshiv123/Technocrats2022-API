@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/d59b24c2-d5a9-43e3-b025-16c336c5b6cc/AppServices/subscriptions/d59b24c2-d5a9-43e3-b025-16c336c5b6cc/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/TechnoAPI2022V1",
+    "appService.deploySubpath": "."
+}

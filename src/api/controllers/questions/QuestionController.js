@@ -12,23 +12,58 @@ create = (req, res) => {
         });
     }
     const question = req.body;
-    // Save Question in the database
+    const answer = req.body.Answer;
+
+    //Save Question in the database
     Question.create(question)
-        .then(data => {
+        .then(questiondata => {
+            var data = [];
+            var qid = questiondata.dataValues.questionId;
+            for (i = 0; i < answer.length; i++) {
+                data.push({ answer: answer[i].answer, iscorrect: answer[i].iscorrect, "questionid": questiondata.dataValues.questionId, });
+            }
+            const x = questiondata;
             // Save Question in the database
-            AnswerMaster.bulkCreate(question.Answer)
-                .then(data => {
-                    res.send(data);
+            AnswerMaster.bulkCreate(data)
+                .then(answerdata => {
+                    successResponse(res, constants.SUCCESS_STATUS_CODE, `${constants.QUESTION, constants.LIST}`, { "questionid": qid });
+
                     //  mail();
                 })
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || constants.USER_CREATION_ERROR
+                    err.message || constants.QUESTION_CREATION_ERROR
             });
         });
 };
+mapquestionanswer = (req, res) => {
+    const QuizMap = db.QuizMap;
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Content can not be empty!"
+        });
+    }
+    var questionmap = [];
+    const data = req.body;
+    for (i = 0; i < data.mappedquestion.length; i++) {
+        questionmap.push({ answer: data.mappedquestion[i], quizid: data.quizid, questionid: data.questionid, questionorder: i });
+    }
+    QuizMap.bulkCreate(questionmap)
+        .then(questiondata => {
+            successResponse(res, constants.SUCCESS_STATUS_CODE, `${constants.QUESTION, constants.MAP}`, questiondata);
+
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || constants.QUESTION_MAPPING_ERROR
+            });
+        });
+
+
+}
 // Retrieve all Question from the database.
 findAll = (async (req, res, next) => {
     const questions = await Question.findAll();
@@ -57,4 +92,4 @@ helloQuestion = (req, res, next) => {
     res.send(`Question ${constants.SERVICE_WORKING_FINE}`);
 };
 
-module.exports = { create, helloQuestion, findOne, findAll, create }
+module.exports = { create, helloQuestion, findOne, findAll, create, mapquestionanswer }
