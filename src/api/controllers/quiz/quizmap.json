@@ -1,0 +1,92 @@
+{
+    "statusCode": "200",
+    "statusMessage": "Success",
+    "quizname": "Science Text",
+    "subjectname": "Current Affairs",
+    "data": [
+        {
+            "questiontypename": "Single Choice",
+            "questionid": 1,
+            "questiontext": "Capital of Rusia",
+            "questionmarks": null,
+            "questiontime": null,
+            "questiontypename": "Single Choice",
+            "options": [
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                },
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                },
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                }
+            ],
+            "correctanswer": [
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                }
+            ]
+        },
+        {
+            "questiontypename": "Single Choice",
+            "questionid": 1,
+            "questiontext": "Capital of Rusia",
+            "questionmarks": null,
+            "questiontime": null,
+            "questiontypename": "Single Choice",
+            "options": [
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                },
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                },
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                }
+            ],
+            "correctanswer": [
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                }
+            ]
+        },
+        {
+            "questiontypename": "Single Choice",
+            "questionid": 1,
+            "questiontext": "Capital of Rusia",
+            "questionmarks": null,
+            "questiontime": null,
+            "questiontypename": "Single Choice",
+            "options": [
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                },
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                },
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                }
+            ],
+            "correctanswer": [
+                {
+                    "answetext": "London",
+                    "answerid": 1
+                }
+            ]
+        }
+    ]
+}

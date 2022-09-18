@@ -5,6 +5,10 @@ const constants = require("../../util/common-util/constatnt/constants");
 
 const Question = db.QuestionMaster;
 const AnswerMaster = db.AnswerMaster;
+AnswerMaster.belongsTo(Question, {
+    foreignKey: "questionid",
+    as: "qid",
+});
 create = (req, res) => {
     if (!req.body) {
         return res.status(400).send({
@@ -48,7 +52,7 @@ mapquestionanswer = (req, res) => {
     var questionmap = [];
     const data = req.body;
     for (i = 0; i < data.mappedquestion.length; i++) {
-        questionmap.push({ answer: data.mappedquestion[i], quizid: data.quizid, questionid: data.questionid, questionorder: i });
+        questionmap.push({ questionid: data.mappedquestion[i], quizid: data.quizid, questionorder: i });
     }
     QuizMap.bulkCreate(questionmap)
         .then(questiondata => {
@@ -68,6 +72,12 @@ mapquestionanswer = (req, res) => {
 findAll = (async (req, res, next) => {
     const questions = await Question.findAll();
     successResponse(res, constants.SUCCESS_STATUS_CODE, constants.SUCCESS, questions);
+});
+
+findquestionById = (async (req, res, next) => {
+    const question = await Question.findByPk(1, { include: ["questionId"] });
+    successResponse(res, constants.SUCCESS_STATUS_CODE, question);
+
 });
 // Find a single Question with an id
 findOne = (req, res) => {
@@ -92,4 +102,4 @@ helloQuestion = (req, res, next) => {
     res.send(`Question ${constants.SERVICE_WORKING_FINE}`);
 };
 
-module.exports = { create, helloQuestion, findOne, findAll, create, mapquestionanswer }
+module.exports = { create, helloQuestion, findOne, findAll, create, mapquestionanswer, findquestionById }

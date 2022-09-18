@@ -2,7 +2,10 @@ const db = require("../../database/models");
 const mail = require("../../util/common-util/mail.util");
 const [successResponse, errorsResponse] = require("../../util/common-util/repsonse");
 const constants = require("../../util/common-util/constatnt/constants");
+const data = require('./quizmap.json');
+
 const Quiz = db.QuizMaster;
+const sequelize = db.sequelize;
 create = (req, res) => {
     if (!req.body) {
         return res.status(400).send({
@@ -14,8 +17,6 @@ create = (req, res) => {
     Quiz.create(quiz)
         .then(data => {
             successResponse(res, constants.SUCCESS_STATUS_CODE, `${constants.Quiz}`, data);
-            // res.send(data);
-            //  mail();
         })
         .catch(err => {
             res.status(500).send({
@@ -32,12 +33,22 @@ findAll = (async (req, res, next) => {
 // Find a single Quiz with an id
 findOne = (req, res) => {
 };
+quizQuestionMapping = (async (req, res, next) => {
+    //  var query = "CALL GetAllQuizData(:qid)";
+    const qid = req.body.qid;
+    // const quizinformation = await sequelize.query(query, { replacements: { qid: qid }, type: sequelize.QueryTypes.SELECT });
+    //successResponse(res, constants.SUCCESS_STATUS_CODE, constants.SUCCESS, quizinformation);
+    successResponse(res, constants.SUCCESS_STATUS_CODE, constants.SUCCESS, data);
+
+
+});
 // Update a Quiz by the id in the request
 update = (req, res) => {
     const quiz = req.body.quiz;
 
 
 };
+
 // Delete a Quiz with the specified id in the request
 deleteQuiz = (req, res) => {
     return Quiz.destroy({
@@ -64,4 +75,4 @@ helloQuiz = (req, res, next) => {
     res.send(`Quiz ${constants.SERVICE_WORKING_FINE}`);
 };
 
-module.exports = { create, helloQuiz, findAllPublished, deleteQuiz, update, findOne, findAll }
+module.exports = { create, helloQuiz, findAllPublished, deleteQuiz, update, findOne, findAll, quizQuestionMapping }

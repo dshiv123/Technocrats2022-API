@@ -12,6 +12,7 @@ questionmaster = (async (req, res, next) => {
     const questionsType = await sequelize.query("SELECT questiontypeid,questiontypename FROM technovationdb.questiontype", { type: QueryTypes.SELECT });
     successResponse(res, constants.SUCCESS_STATUS_CODE, constants.SUCCESS, questionsType);
 });
+
 helloMaster = (req, res, next) => {
     res.send(`Master ${constants.SERVICE_WORKING_FINE}`);
 };
