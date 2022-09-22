@@ -20,15 +20,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         quiztime: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 0
         },
         istimerenabled: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 0
         },
         quizcode: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
     }, {
         freezeTableName: true

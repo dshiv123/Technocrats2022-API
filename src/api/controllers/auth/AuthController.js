@@ -14,10 +14,10 @@ const authnticateUser = async (req, res, next) => {
     where: { email: req.body.email },
   }).then((user) => {
     if (user && user.email) {
-      const accessToken = jwt.sign(user.email, process.env.ACCESS_TOKEN_SECRET);
+      //   const accessToken = jwt.sign(user.email, process.env.ACCESS_TOKEN_SECRET);
+      const accessToken = "ABCG12333";
       successResponse(res, 10000, "User Authorize", user, accessToken);
       logger.info('User Authorized', { sessionID: `${req.id}` });
-
     } else {
       errorsResponse(res, 10001, "No user found")
     }

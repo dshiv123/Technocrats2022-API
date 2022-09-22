@@ -48,6 +48,8 @@ const loginRoute = require("./src/api/routes/auth.route");
 const userRoute = require("./src/api/routes/user.route");
 const countryRoute = require("./src/api/routes/country.route");
 const quizRoute = require("./src/api/routes/quiz.route");
+const quizusermapping = require("./src/api/routes/quizusermapping.route");
+
 const masterRoute = require("./src/api/routes/masters.route");
 const questionRoute = require("./src/api/routes/question.route");
 
@@ -58,6 +60,8 @@ app.use("/", countryRoute);
 app.use("/", quizRoute);
 app.use("/", masterRoute);
 app.use("/", questionRoute);
+
+app.use("/", quizusermapping);
 // app.use(function (err, req, res, next) {
 //     logger.error(`${req.method} - ${err.message}  - ${req.originalUrl} - ${req.ip}`);
 //     next(err)

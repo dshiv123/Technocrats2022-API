@@ -8,8 +8,9 @@ app.use("/", router);
 // create application/json parser
 var jsonParser = bodyParser.json();
 router.post("/question", jsonParser, question.create);
+router.post("/question/cratequestionlist", jsonParser, question.createquestionanswerandmapping);
 router.get("/question", question.helloQuestion);
-router.get("/question/allquestion", question.findAll);
+router.get("/question/allquestion", question.findAllQuestions);
 router.post("/question/mapquestionanswer", jsonParser, question.mapquestionanswer);
 router.post("/question/findquestionbyid", jsonParser, question.findquestionById);
 

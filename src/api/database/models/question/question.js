@@ -1,14 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     const QuestionMaster = sequelize.define('QuestionMaster', {
-        questionId: {
+        questionid: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
         questiontext: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            allowNull: false
         },
         subjectid: {
             type: DataTypes.INTEGER,
@@ -20,20 +19,23 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            allowNull: true
+
         },
         questionmarks: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true,
+            defaultValue: 10
         },
         questiontime: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 10
         },
         isactive: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
+            defaultValue: true
         },
         isMandatory: {
             type: DataTypes.BOOLEAN,
@@ -43,10 +45,17 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         freezeTableName: true
     });
-    QuestionMaster.associate = function (models) {
-        QuestionMaster.hasMany(models.AnswerMaster);
-    };
+    // QuestionMaster.associate = function (models) {
+    //     QuestionMaster.hasMany(models.AnswerMaster);
+    // };
+    // QuestionMaster.associate = function (models) {
+    //     //  QuestionMaster.belongsTo(models.Company, { foreignKey: 'companyId', as: 'company' })
+    //     QuestionMaster.belongsToMany(models.AnswerMaster, { through: 'models.AnswerMaster', foreignKey: 'questionid', as: 'qid1' })
+    // };
 
+    QuestionMaster.associate = function (models) {
+        QuestionMaster.hasMany(models.AnswerMaster, { foreignKey: 'questionid', as: 'questionid' })
+    };
     return QuestionMaster;
 };
 

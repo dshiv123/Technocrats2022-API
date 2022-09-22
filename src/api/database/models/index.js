@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'development';
 const config = require('../../database/config/config')[env];
 const db = {};
 let sequelize;
@@ -29,11 +29,11 @@ const getAllDBModels = function (dirPath, arrayOfFiles) {
       db[model.name] = model;
     }
   })
-  Object.keys(db).forEach(modelName => {
-    if (db[modelName].associate) {
-      db[modelName].associate(db);
-    }
-  });
+  // Object.keys(db).forEach(modelName => {
+  //   if (db[modelName].associate) {
+  //     db[modelName].associate(db);
+  //   }
+  // });
   return arrayOfFiles
 }
 getAllDBModels(__dirname);
