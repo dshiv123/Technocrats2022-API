@@ -42,41 +42,6 @@ create = (req, res) => {
             });
         });
 };
-createquestionanswerandmapping = (req, res) => {
-    if (!req.body) {
-        return res.status(400).send({
-            message: "Content can not be empty!"
-        });
-    }
-    const question = req.body;
-    const answer = req.body.Answer;
-
-    //Save Question in the database
-    Question.create(question)
-        .then(questiondata => {
-            var data = [];
-            var qid = questiondata.dataValues.questionId;
-            for (i = 0; i < answer.length; i++) {
-                data.push({ answer: answer[i].answer, iscorrect: answer[i].iscorrect, "questionid": questiondata.dataValues.questionId, });
-
-            }
-            const x = questiondata;
-            // Save Question in the database
-            AnswerMaster.bulkCreate(data)
-                .then(answerdata => {
-
-                    successResponse(res, constants.SUCCESS_STATUS_CODE, `${constants.QUESTION, constants.LIST}`, { "questionid": qid });
-
-                    //  mail();
-                })
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || constants.QUESTION_CREATION_ERROR
-            });
-        });
-};
 mapquestionanswer = (req, res) => {
     const QuizMap = db.QuizMap;
     if (!req.body) {
@@ -104,47 +69,16 @@ mapquestionanswer = (req, res) => {
 
 }
 // Retrieve all Question from the database.
-findAllQuestions = (async (req, res, next) => {
+findAll = (async (req, res, next) => {
     const questions = await Question.findAll();
     successResponse(res, constants.SUCCESS_STATUS_CODE, constants.SUCCESS, questions);
 });
 
 findquestionById = (async (req, res, next) => {
-    const questions = await Question.findAll();
-    let answer = [];
-    let answerResult;
-    let questionans = [];
-    for (question of questions) {
-        answerResult = await AnswerMaster.findAll
-            ({
-                where: { questionid: question.dataValues.questionid },
-            })
-        if (answerResult) {
-            answerResult.forEach(answerText => {
-                answer.push({
-
-                    questionid: answerText.questionid,
-                    answerid: answerText.answer,
-                    answer: answerText.answer,
-                    iscorrect: answerText.iscorrect
-                })
-            });
-            questionans.push({
-                questions: question,
-                answer: answer
-
-            })
-            answer = [];
-        }
-    };
-
-    //  const resquestion = Object.assign(question, answer);
-    // const question = await AnswerMaster.findByPk(1, { include: ['qid'] });
-    successResponse(res, constants.SUCCESS_STATUS_CODE, constants.SUCCESS, questionans);
+    const question = await Question.findByPk(1, { include: ["questionId"] });
+    successResponse(res, constants.SUCCESS_STATUS_CODE, question);
 
 });
-
-
 // Find a single Question with an id
 findOne = (req, res) => {
 };
@@ -155,6 +89,7 @@ deleteQuestion = (req, res) => {
         where: { questionid: req.params.questionID }
     }).then(data => {
         successResponse(res, 10000, `${constants.USER_DELETED_SUCCESFULLY}: ${req.params.questionID}`);
+
     })
         .catch(err => {
             errorsResponse(res, res.statusCode, `${constants.USER_DELETE_ERROR} ${req.params.questionID}- ${err.message}`);
@@ -167,4 +102,4 @@ helloQuestion = (req, res, next) => {
     res.send(`Question ${constants.SERVICE_WORKING_FINE}`);
 };
 
-module.exports = { create, helloQuestion, findOne, findAllQuestions, create, mapquestionanswer, findquestionById, createquestionanswerandmapping }
+module.exports = { create, helloQuestion, findOne, findAll, create, mapquestionanswer, findquestionById }

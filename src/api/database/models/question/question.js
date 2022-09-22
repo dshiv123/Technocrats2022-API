@@ -1,13 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
     const QuestionMaster = sequelize.define('QuestionMaster', {
-        questionid: {
+        questionId: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
         questiontext: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         subjectid: {
             type: DataTypes.INTEGER,
@@ -19,23 +20,20 @@ module.exports = (sequelize, DataTypes) => {
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: true
-
+            allowNull: false,
+            unique: true
         },
         questionmarks: {
             type: DataTypes.INTEGER,
-            allowNull: true,
-            defaultValue: 10
+            allowNull: false
         },
         questiontime: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 10
+            allowNull: false
         },
         isactive: {
             type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: true
+            allowNull: false
         },
         isMandatory: {
             type: DataTypes.BOOLEAN,
@@ -45,17 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         freezeTableName: true
     });
-    // QuestionMaster.associate = function (models) {
-    //     QuestionMaster.hasMany(models.AnswerMaster);
-    // };
-    // QuestionMaster.associate = function (models) {
-    //     //  QuestionMaster.belongsTo(models.Company, { foreignKey: 'companyId', as: 'company' })
-    //     QuestionMaster.belongsToMany(models.AnswerMaster, { through: 'models.AnswerMaster', foreignKey: 'questionid', as: 'qid1' })
-    // };
-
     QuestionMaster.associate = function (models) {
-        QuestionMaster.hasMany(models.AnswerMaster, { foreignKey: 'questionid', as: 'questionid' })
+        QuestionMaster.hasMany(models.AnswerMaster);
     };
+
     return QuestionMaster;
 };
 

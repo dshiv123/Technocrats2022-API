@@ -12,9 +12,5 @@ var jsonParser = bodyParser.json();
 router.post("/quiz", jsonParser, quiz.create);
 router.get("/quiz", quiz.helloQuiz);
 router.get("/quiz/allquiz", quiz.findAll);
-router.get("/quiz/quizQuestionMapping", quiz.quizQuestionMapping);
-
-router.post("/findQuizbyCode", jsonParser, quiz.findQuizbyCode);
 //router.delete('/quiz/:quizID', quiz.deleteUser)
-//findAllQuiz
 module.exports = router;
