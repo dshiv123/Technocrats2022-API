@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
 
 
     }, {
-        freezeTableName: true
+        freezeTableName: true,
+        paranoid:true
     });
 
     return User;
